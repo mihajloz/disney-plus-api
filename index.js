@@ -27,7 +27,7 @@ mongoose.connect(process.env.CONNECTION_URI, {
 
 app.use(
   cors({
-    origin: "*", // Allow requests from all origins
+    origin: "*",
   })
 );
 
