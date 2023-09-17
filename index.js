@@ -163,7 +163,7 @@ app.delete(
 app.get(
   "/movies",
   passport.authenticate("jwt", { session: false }),
-  async (req, res) => {
+  (req, res) => {
     Movies.find()
       .then((movies) => {
         res.status(201).json(movies);
