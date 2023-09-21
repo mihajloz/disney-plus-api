@@ -181,18 +181,18 @@ app.get("/movies/:title", async (req, res) => {
 app.get("/movies/:id", async (req, res) => {
   const { id } = req.params;
 
-  Movies.findOne({ _id: id })
-    .then((movie) => {
-      if (movie) {
-        res.status(200).json(movie);
-      } else {
-        res.status(404).send("Movie not found");
-      }
-    })
-    .catch((error) => {
-      console.error(error);
-      res.status(500).send("Error: " + error);
-    });
+  try {
+    const movie = await Movies.findOne({ _id: mongoose.Types.ObjectId(id) });
+
+    if (movie) {
+      res.status(200).json(movie);
+    } else {
+      res.status(404).send("Movie not found");
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error: " + error);
+  }
 });
 
 // home page
