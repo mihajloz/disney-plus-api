@@ -181,7 +181,7 @@ app.get("/movies/:title", async (req, res) => {
 app.get("/movies/:id", async (req, res) => {
   const { id } = req.params;
 
-  Movies.findById(id)
+  Movies.findOne({ _id: id })
     .then((movie) => {
       if (movie) {
         res.status(200).json(movie);
