@@ -177,6 +177,24 @@ app.get("/movies/:title", async (req, res) => {
     });
 });
 
+// GET movie by ID
+app.get("/movies/:id", async (req, res) => {
+  const { id } = req.params;
+
+  Movies.findById(id)
+    .then((movie) => {
+      if (movie) {
+        res.status(200).json(movie);
+      } else {
+        res.status(404).send("Movie not found");
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).send("Error: " + error);
+    });
+});
+
 // home page
 app.get("/", (req, res) => {
   res.send("Home Page");
